@@ -1,0 +1,8 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: blog-label
+  cloud:
+    nacos:
+      server-addr: 192.168.1.10:8848
