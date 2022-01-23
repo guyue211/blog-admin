@@ -1,8 +1,8 @@
 server:
-  port: 8003
+  port: 8004
 spring:
   application:
-    name: blog-label
+    name: blog-comments
   cloud:
     nacos:
       server-addr: 192.168.1.10:8848

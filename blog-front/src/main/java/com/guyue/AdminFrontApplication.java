@@ -1,19 +1,17 @@
 package com.guyue;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author tokyo
- * @date 2022/1/16
+ * @date 2022/1/23
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan(basePackages = "com.guyue.mapper.*")
-public class AdminCategoryApplication {
+public class AdminFrontApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AdminCategoryApplication.class,args);
+        SpringApplication.run(AdminFrontApplication.class,args);
     }
 }

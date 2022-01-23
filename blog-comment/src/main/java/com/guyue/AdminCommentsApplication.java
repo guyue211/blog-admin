@@ -12,8 +12,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan(basePackages = "com.guyue.mapper.*")
-public class AdminCategoryApplication {
+public class AdminCommentsApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AdminCategoryApplication.class,args);
+        SpringApplication.run(AdminCommentsApplication.class,args);
     }
 }

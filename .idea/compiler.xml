@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="blog-article" />
+        <module name="blog-category" />
+        <module name="blog-label" />
+        <module name="blog-front" />
+        <module name="blog-commons" />
+        <module name="blog-gateway" />
+        <module name="blog-comment" />
+        <module name="blog-admins" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="blog-config" target="8" />
+      <module name="blog-nacos" target="8" />
+      <module name="blog-users" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
