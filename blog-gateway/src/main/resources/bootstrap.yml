@@ -2,19 +2,14 @@ spring:
   profiles:
     active: dev
   application:
-    name: nacos-config-advanced
-  main:
-    allow-bean-definition-overriding: true
+    name: blog-gateway
   cloud:
     nacos:
-      # 权限认证，nacos.core.auth.enabled=true 时需要添加
-      username: ${nacos.username}
-      password: ${nacos.password}
-        config:
-          server-addr: ${nacos.server-addr}
+      server-addr: ${nacos.server-addr}
+      config:
+        server-addr: ${nacos.server-addr}
           namespace: ${nacos.namespace}
           file-extension: yml
           group: BLOG_GROUP
-        shared-configs:
-          - data-id: public-config.yml
-            refresh: true
+          username: ${nacos.username}
+          password: ${nacos.password}
