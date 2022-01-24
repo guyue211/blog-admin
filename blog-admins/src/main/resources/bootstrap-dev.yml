@@ -1,0 +1,6 @@
+nacos:
+  server-addr: 192.168.1.10:8848
+  username: nacos
+  password: nacos
+  # 开发环境的 namespace ID
+  namespace: 6ccfce9c-32bc-4de3-8431-ef199be2fc25

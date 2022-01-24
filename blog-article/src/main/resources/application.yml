@@ -3,6 +3,5 @@ server:
 spring:
   application:
     name: blog-article
-  cloud:
-    nacos:
-      server-addr: 192.168.1.10:8848
+  profiles:
+    active: dev

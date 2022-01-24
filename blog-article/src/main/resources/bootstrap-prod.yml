@@ -1,0 +1,6 @@
+nacos:
+  server-addr: 127.0.0.1:8848
+  username: nacos
+  password: nacos
+  # 线上环境的 namespace ID
+  namespace: daef753f-8aff-4639-ab6e-86b50047fe1a

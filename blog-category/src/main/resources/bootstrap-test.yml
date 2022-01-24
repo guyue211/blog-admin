@@ -1,0 +1,6 @@
+nacos:
+  server-addr: 127.0.0.1:8848
+  username: nacos
+  password: nacos
+  # 测试环境的 namespace ID
+  namespace: f92d4fa3-d139-451b-a13e-16577ce16922

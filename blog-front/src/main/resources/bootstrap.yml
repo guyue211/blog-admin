@@ -1,9 +1,21 @@
 spring:
+  profiles:
+    active: dev
   cloud:
     nacos:
-      config:
-        server-addr: 192.168.1.10:8848
-        file-extension: yml
-        extension-configs:
-          - data-id: public-config.yml
-            refresh: true
+     discovery:
+       server-addr: ${nacos.server-addr}
+       namespace: ${nacos.namespace}
+       group: BLOG_GROUP
+     config:
+          server-addr: ${nacos.server-addr}
+          namespace: ${nacos.namespace}
+          file-extension: yml
+          group: BLOG_GROUP
+          username: ${nacos.username}
+          password: ${nacos.password}
+          # 用于共享的配置文件
+          shared-configs:
+            - data-id: public-config.yml
+              group: BLOG-GROUP
+

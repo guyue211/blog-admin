@@ -1,15 +1,17 @@
 spring:
   profiles:
     active: dev
-  application:
-    name: blog-gateway
   cloud:
     nacos:
-      server-addr: ${nacos.server-addr}
-      config:
-        server-addr: ${nacos.server-addr}
+     discovery:
+       server-addr: ${nacos.server-addr}
+       namespace: ${nacos.namespace}
+       group: BLOG_GROUP
+     config:
+          server-addr: ${nacos.server-addr}
           namespace: ${nacos.namespace}
           file-extension: yml
           group: BLOG_GROUP
           username: ${nacos.username}
           password: ${nacos.password}
+
