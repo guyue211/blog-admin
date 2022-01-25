@@ -1,6 +1,7 @@
 package com.guyue.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
  * @date 2022/1/23
  */
 @Component
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Category {
     //分类id
     private Integer id;
@@ -17,15 +19,15 @@ public class Category {
     private String name;
     //分类创建时间
     @JsonFormat(pattern = "yyyy.M.d", timezone = "GMT+8")
-    private Date create_time;
+    private Date createTime;
 
     public Category() {
     }
 
-    public Category(Integer id, String name, Date create_time) {
+    public Category(Integer id, String name, Date createTime) {
         this.id = id;
         this.name = name;
-        this.create_time = create_time;
+        this.createTime = createTime;
     }
 
     public Integer getId() {
@@ -44,12 +46,12 @@ public class Category {
         this.name = name;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date create_time) {
+        this.createTime = create_time;
     }
 
     @Override
@@ -57,7 +59,7 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", create_time=" + create_time +
+                ", createTime=" + createTime +
                 '}';
     }
 }

@@ -7,4 +7,7 @@
     <select id="getCategoryById" resultType="com.guyue.entity.Category">
         select id, name from category where id=#{id}
     </select>
+    <select id="getCategorys" resultType="com.guyue.entity.Category">
+        select id, name, create_time from category
+    </select>
 </mapper>

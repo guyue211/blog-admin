@@ -3,5 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guyue.mapper.CommentMapper">
-
+    <resultMap id="comments" type="com.guyue.entity.Comment">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="name" property="name"/>
+        <result column="photo" property="photo"/>
+        <result column="email" property="email"/>
+        <result column="create_time" property="createTime"/>
+        <collection property="comments" column="id" select="getParentComment" javaType="ArrayList" ofType="com.guyue.entity.Comment"/>
+    </resultMap>
+    <select id="getCommentsByAid" resultMap="comments" >
+        select id, name, content, photo, email, create_time,id from comment where article_id=#{aid} and parent_id=0
+    </select>
+    <select id="getParentComment" resultType="com.guyue.entity.Comment">
+        select id, name, content, photo, email,parent_id from comment where parent_id=#{parentId}
+    </select>
 </mapper>

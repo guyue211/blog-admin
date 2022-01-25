@@ -1,6 +1,7 @@
 package com.guyue.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.List;
  * @date 2022/1/23
  */
 @Component
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Comment {
     //评论id
     private Integer id;
@@ -23,27 +25,27 @@ public class Comment {
     //评论人邮箱
     private String email;
     //评论时间
-    @JsonFormat(pattern = "yyyy.M.d", timezone = "GMT+8")
-    private Date create_time;
+    @JsonFormat(pattern = "yyyy.M.d")
+    private Date createTime;
     //父评论id
-    private Integer parent_id;
+    private Integer parentId;
     //评论绑定文章id
-    private Integer article_id;
+    private Integer articleId;
     //子评论
     private List<Comment> comments;
 
     public Comment() {
   }
 
-    public Comment(Integer id, String name, String content, String photo, String email, Date create_time, Integer parent_id, Integer article_id, List<Comment> comments) {
+    public Comment(Integer id, String name, String content, String photo, String email, Date createTime, Integer parentId, Integer articleId, List<Comment> comments) {
         this.id = id;
         this.name = name;
         this.content = content;
         this.photo = photo;
         this.email = email;
-        this.create_time = create_time;
-        this.parent_id = parent_id;
-        this.article_id = article_id;
+        this.createTime = createTime;
+        this.parentId = parentId;
+        this.articleId = articleId;
         this.comments = comments;
     }
 
@@ -87,28 +89,28 @@ public class Comment {
         this.email = email;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Integer getParent_id() {
-        return parent_id;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setParent_id(Integer parent_id) {
-        this.parent_id = parent_id;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
-    public Integer getArticle_id() {
-        return article_id;
+    public Integer getArticleId() {
+        return articleId;
     }
 
-    public void setArticle_id(Integer article_id) {
-        this.article_id = article_id;
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
     }
 
     public List<Comment> getComments() {
@@ -127,9 +129,9 @@ public class Comment {
                 ", content='" + content + '\'' +
                 ", photo='" + photo + '\'' +
                 ", email='" + email + '\'' +
-                ", create_time=" + create_time +
-                ", parent_id=" + parent_id +
-                ", article_id=" + article_id +
+                ", createTime=" + createTime +
+                ", parentId=" + parentId +
+                ", articleId=" + articleId +
                 ", comments=" + comments +
                 '}';
     }

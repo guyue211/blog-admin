@@ -37,4 +37,11 @@ public interface ArticleMapper {
      * @return
      */
     int deleteArticle(int[] ids);
+
+    /**
+     * 查单个文章 通过文章id
+     * @param id
+     * @return
+     */
+    Article getArticle(Integer id);
 }

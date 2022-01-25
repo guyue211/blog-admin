@@ -5,3 +5,5 @@ spring:
     name: blog-article
   profiles:
     active: dev
+  main:
+    allow-bean-definition-overriding: true

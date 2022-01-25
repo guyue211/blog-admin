@@ -11,7 +11,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan("com.guyue.mapper.*")
+@MapperScan(basePackages = "com.guyue.mapper")
 public class AdminLabelApplication {
     public static void main(String[] args) {
         SpringApplication.run(AdminLabelApplication.class,args);

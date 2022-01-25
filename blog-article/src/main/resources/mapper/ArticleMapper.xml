@@ -20,6 +20,7 @@
                     javaType="ArrayList" ofType="com.guyue.entity.Label"/>
 
     </resultMap>
+
     <!--    新增文章-->
     <insert id="addArticle">
         insert into article (article_uuid, title, author, content, create_time, update_time, category_id)
@@ -86,5 +87,20 @@
                category_id,
                id
         from article;
+    </select>
+<!--    前端单文章页面-->
+    <select id="getArticle" resultMap="article">
+        select id,
+               article_uuid,
+               title,
+               author,
+               content,
+               create_time,
+               update_time,
+               like_num,
+               page_views,
+               category_id,
+               id
+        from article WHERE id=#{id};
     </select>
 </mapper>

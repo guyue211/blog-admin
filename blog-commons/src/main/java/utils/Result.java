@@ -19,6 +19,10 @@ public class Result {
         this.msg = msg;
     }
 
+    public Result() {
+
+    }
+
     public Integer getCode() {
         return code;
     }

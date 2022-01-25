@@ -77,4 +77,10 @@ public class ArticleServiceImpl implements ArticleService {
     public int deleteArticle(int[] ids) {
         return mapper.deleteArticle(ids);
     }
+
+    @Override
+    public Article getArticle(Integer id) {
+        return mapper.getArticle(id);
+    }
+
 }

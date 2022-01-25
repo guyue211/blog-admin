@@ -27,4 +27,6 @@ public interface ArticleService {
     int updateArticle(Article article);
 
     int deleteArticle(int[] ids);
+
+    Article getArticle(Integer id);
 }

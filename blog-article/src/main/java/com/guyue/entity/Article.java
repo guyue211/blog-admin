@@ -1,17 +1,20 @@
 package com.guyue.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author tokyo
  * @date 2022/1/23
  */
 @Component
-//@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Article{
     //文章id
     private Integer id;
@@ -36,7 +39,7 @@ public class Article{
     //文章uuid
     private String articleUUID;
     //评论
-    private List<Comment> comments;
+    private HashMap<Object,Object> comments;
     //标签
     private List<Label> labels;
 
@@ -61,7 +64,7 @@ public class Article{
     public Article() {
     }
 
-    public Article(Integer id, String title, String content, Date createTime, Date updateTime, Category category, String author, Integer likeNum, Integer pageViews, String articleUUID, List<Comment> comments, List<Label> labels) {
+    public Article(Integer id, String title, String content, Date createTime, Date updateTime, Category category, String author, Integer likeNum, Integer pageViews, String articleUUID, HashMap<Object,Object> comments, List<Label> labels) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -156,11 +159,11 @@ public class Article{
         this.articleUUID = articleUUID;
     }
 
-    public List<Comment> getComments() {
+    public HashMap<Object,Object> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(HashMap<Object,Object> comments) {
         this.comments = comments;
     }
 

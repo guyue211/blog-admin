@@ -1,6 +1,7 @@
 package com.guyue.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,15 +11,16 @@ import java.util.Date;
  * @date 2022/1/23
  */
 @Component
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Label {
     private Integer id;
     private String name;
-    @JsonFormat(pattern = "yyyy.M.d", timezone = "GMT+8")
-    private Date create_time;
-    public Label(Integer id, String name, Date create_time) {
+    @JsonFormat(pattern = "yyyy.M.d")
+    private Date createTime;
+    public Label(Integer id, String name, Date createTime) {
         this.id = id;
         this.name = name;
-        this.create_time = create_time;
+        this.createTime = createTime;
     }
     public Label() {
     }
@@ -39,12 +41,12 @@ public class Label {
         this.name = name;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class Label {
         return "Label{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", create_time=" + create_time +
+                ", createTime=" + createTime +
                 '}';
     }
 }
