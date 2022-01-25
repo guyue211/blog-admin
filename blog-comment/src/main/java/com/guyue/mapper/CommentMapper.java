@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
  * @date 2022/1/23
  */
 @Repository
-public class CommentMapper {
+public interface CommentMapper {
 }

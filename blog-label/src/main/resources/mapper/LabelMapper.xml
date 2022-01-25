@@ -3,5 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guyue.mapper.LabelMapper">
-
+    <!--查文章所含标签 根据文章id 通过中间表-->
+    <select id="getLabelByAid" resultType="com.guyue.entity.Label">
+        select l.id, l.name
+        from label l
+                 left join article__label al on l.id = al.label_id
+        where al.article_id = #{aid}
+    </select>
 </mapper>

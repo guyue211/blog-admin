@@ -3,5 +3,88 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guyue.mapper.ArticleMapper">
+    <!--    查看所有文章的resultMap-->
+    <resultMap id="article" type="com.guyue.entity.Article">
+        <id column="id" property="id"/>
+        <result column="article_uuid" property="articleUUID"/>
+        <result column="title" property="title"/>
+        <result column="author" property="author"/>
+        <result column="content" property="content"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="like_num" property="likeNum"/>
+        <result column="page_views" property="pageViews"/>
+        <association property="category" column="category_id" javaType="com.guyue.entity.Category"
+                     select="com.guyue.mapper.CategoryMapper.getCategoryById"/>
+        <collection property="labels" column="id" select="com.guyue.mapper.LabelMapper.getLabelByAid"
+                    javaType="ArrayList" ofType="com.guyue.entity.Label"/>
 
+    </resultMap>
+    <!--    新增文章-->
+    <insert id="addArticle">
+        insert into article (article_uuid, title, author, content, create_time, update_time, category_id)
+        values (#{articleUUID},
+                #{title},
+                #{author},
+                #{content},
+                #{createTime},
+                #{updateTime},
+                #{category.id})
+    </insert>
+<!--    修改更新文章-->
+    <update id="updateArticle">
+        update article set
+        <trim suffixOverrides=",">
+            <if test="articleUUID !=null and articleUUID!=''">
+                article_uuid=#{articleUUID},
+            </if>
+            <if test="title !=null and title!=''">
+                title=#{title},
+            </if>
+            <if test="author !=null and author!=''">
+                author=#{author},
+            </if>
+            <if test="content !=null and content!=''">
+                content=#{content},
+            </if>
+            <if test="createTime != null ">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime !=null ">
+                update_time=#{updateTime},
+            </if>
+            <if test="category.id !=0">
+                category_id=#{category.id},
+            </if>
+            <if test="likeNum !=0">
+                like_num=#{likeNum},
+            </if>
+            <if test="pageViews !=0">
+                page_views=#{pageViews},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+<!--    删除文章-->
+    <delete id="deleteArticle">
+        delete from article where id in
+        <foreach collection="array" item="id"  index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--    查看所有文章-->
+    <select id="getArticles" resultMap="article">
+        select id,
+               article_uuid,
+               title,
+               author,
+               content,
+               create_time,
+               update_time,
+               like_num,
+               page_views,
+               category_id,
+               id
+        from article;
+    </select>
 </mapper>

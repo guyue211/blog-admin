@@ -1,4 +1,4 @@
-package com.guyue.entiey;
+package com.guyue.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.stereotype.Component;

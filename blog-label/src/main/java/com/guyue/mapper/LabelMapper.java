@@ -1,6 +1,9 @@
 package com.guyue.mapper;
 
+import com.guyue.entity.Label;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author tokyo
@@ -8,4 +11,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface LabelMapper {
+    /**
+     * 根据文章id 查所含标签
+     * @param aid
+     * @return
+     */
+    List<Label> getLabelByAid(Integer aid);
 }

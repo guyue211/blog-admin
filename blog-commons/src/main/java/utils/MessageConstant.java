@@ -12,6 +12,14 @@ public class MessageConstant {
 
     public static final String SELECT_ARTICLE_SUSSES = "查询文章成功";
     public static final String SELECT_ARTICLE_FALL = "查询文章失败";
+    public static final String ADD_ARTICLE_SUSSES = "发布文章成功";
+    public static final String ADD_ARTICLE_FALL = "发布文章失败";
+    public static final String UPDATE_ARTICLE_SUSSES = "修改文章成功";
+    public static final String UPDATE_ARTICLE_FALL = "修改文章失败";
+    public static final String DELETE_ARTICLE_SUSSES = "删除文章成功";
+    public static final String DELETE_ARTICLE_FALL = "删除文章失败";
+
+
 
     public static final String SELECT_SORT_SUSSES = "查询分类成功";
     public static final String SELECT_SORT_FALL = "查询分类失败";

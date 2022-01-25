@@ -3,5 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guyue.mapper.CategoryMapper">
-
+<!--    根据id查类别-->
+    <select id="getCategoryById" resultType="com.guyue.entity.Category">
+        select id, name from category where id=#{id}
+    </select>
 </mapper>

@@ -22,5 +22,20 @@
             <artifactId>blog-commons</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.guyue</groupId>
+            <artifactId>blog-comment</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.guyue</groupId>
+            <artifactId>blog-label</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.guyue</groupId>
+            <artifactId>blog-category</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
