@@ -23,13 +23,11 @@
 
     <!--    新增文章-->
     <insert id="addArticle">
-        insert into article (article_uuid, title, author, content, create_time, update_time, category_id)
+        insert into article (article_uuid, title, author, content,  category_id)
         values (#{articleUUID},
                 #{title},
                 #{author},
                 #{content},
-                #{createTime},
-                #{updateTime},
                 #{category.id})
     </insert>
 <!--    修改更新文章-->

@@ -46,7 +46,11 @@ public class Label {
     }
 
     public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+        if (createTime==null){
+            this.createTime =new Date();
+        }else {
+            this.createTime = createTime;
+        }
     }
 
     @Override

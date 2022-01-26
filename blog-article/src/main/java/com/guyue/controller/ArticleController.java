@@ -4,16 +4,12 @@ import com.guyue.entity.Article;
 import com.guyue.entity.Comment;
 import com.guyue.service.ArticleService;
 import com.guyue.service.CommentsFeignService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
-import utils.MessageConstant;
-import utils.PageInfo;
-import utils.Result;
+import com.guyue.utils.MessageConstant;
+import com.guyue.utils.PageInfo;
+import com.guyue.utils.Result;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,9 +23,8 @@ public class ArticleController {
     private ArticleService service;
     @Autowired
     private CommentsFeignService commentsFeignService;
-
     /**
-     * 查询全部文章 并分页
+     * 后台查询全部文章 并分页
      * @param pageInfo
      * @return
      */
@@ -52,9 +47,9 @@ public class ArticleController {
     public Result addArticle(@RequestBody Article article){
         int result=service.addArticle(article);
         if(result==0){
-            return new Result(500,MessageConstant.ADD_ARTICLE_FALL);
+            return new Result(400,MessageConstant.RELEASE_ARTICLE_FALL);
         }
-        return new Result(204,MessageConstant.ADD_ARTICLE_SUSSES);
+        return new Result(204,MessageConstant.RELEASE_ARTICLE_SUSSES);
     }
 
     /**
@@ -96,7 +91,9 @@ public class ArticleController {
         HashMap<Object, Object> map = new HashMap<>();
         //查文章下评论
         List<Comment> comments = commentsFeignService.getComments(id);
-        map.put("comments",comments);
+        if (comments.size()>0){
+            map.put("comments",comments);
+        }
         map.put("article",article);
         return new Result(200,MessageConstant.SELECT_ARTICLE_SUSSES,map);
     }

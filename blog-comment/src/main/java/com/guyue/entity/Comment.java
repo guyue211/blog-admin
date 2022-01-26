@@ -94,7 +94,11 @@ public class Comment {
     }
 
     public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+        if (createTime==null){
+            this.createTime =new Date();
+        }else {
+            this.createTime = createTime;
+        }
     }
 
     public Integer getParentId() {

@@ -1,7 +1,7 @@
 package com.guyue.service;
 
 import com.guyue.entity.Article;
-import utils.PageInfo;
+import com.guyue.utils.PageInfo;
 
 import java.util.List;
 

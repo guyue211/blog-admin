@@ -5,8 +5,7 @@ import com.guyue.mapper.ArticleMapper;
 import com.guyue.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import utils.PageInfo;
-import utils.Result;
+import com.guyue.utils.PageInfo;
 
 import java.util.ArrayList;
 import java.util.List;

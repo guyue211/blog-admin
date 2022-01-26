@@ -6,14 +6,51 @@
     <resultMap id="comments" type="com.guyue.entity.Comment">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
-        <result column="name" property="name"/>
         <result column="photo" property="photo"/>
         <result column="email" property="email"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="article_id" property="articleId"/>
         <result column="create_time" property="createTime"/>
         <collection property="comments" column="id" select="getParentComment" javaType="ArrayList" ofType="com.guyue.entity.Comment"/>
     </resultMap>
+    <insert id="addComment">
+        insert into comment(name, content, photo, email,parent_id, article_id) values(#{name},#{content},#{photo},#{email},#{parentId},#{articleId})
+    </insert>
+    <update id="updateComment">
+        update comment set
+        <trim suffixOverrides=",">
+            <if test="name !=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="photo !=null and photo!=''">
+                photo=#{photo},
+            </if>
+            <if test="email !=null and email!=''">
+                email=#{email},
+            </if>
+            <if test="content !=null and content!=''">
+                content=#{content},
+            </if>
+            <if test="createTime != null ">
+                create_time=#{createTime},
+            </if>
+            <if test="parentId != null ">
+                parent_id=#{parentId},
+            </if>
+            <if test="articleId != null ">
+                article_id=#{articleId},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+    <delete id="deleteComment">
+        delete from comment where id=#{id}
+    </delete>
+    <delete id="deleteCommentByPid">
+        delete from comment where parent_id=#{pid}
+    </delete>
     <select id="getCommentsByAid" resultMap="comments" >
-        select id, name, content, photo, email, create_time,id from comment where article_id=#{aid} and parent_id=0
+        select id, name, content, photo, email, create_time,parent_id,id from comment where article_id=#{aid} and parent_id=0
     </select>
     <select id="getParentComment" resultType="com.guyue.entity.Comment">
         select id, name, content, photo, email,parent_id from comment where parent_id=#{parentId}

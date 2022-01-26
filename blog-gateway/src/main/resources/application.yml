@@ -1,7 +1,41 @@
 server:
-  port: 8888
+  port: 80
 spring:
   application:
     name: blog-gateway
   profiles:
     active: dev
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: admin-article
+          uri: lb://blog-article
+          predicates:
+            - Path=/admin/article/**
+          filters:
+            - StripPrefix=2
+            - PrefixPath=/admin
+        - id: admin-category
+          uri: lb://blog-category
+          predicates:
+            - Path=/admin/category/**
+          filters:
+            - StripPrefix=2
+            - PrefixPath=/admin
+        - id: admin-comment
+          uri: lb://blog-comment
+          predicates:
+            - Path=/admin/comment/**
+          filters:
+            - StripPrefix=2
+            - PrefixPath=/admin
+        - id: admin-label
+          uri: lb://blog-label
+          predicates:
+            - Path=/admin/label/**
+          filters:
+            - StripPrefix=2
+            - PrefixPath=/admin

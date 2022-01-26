@@ -22,4 +22,39 @@ public class CommentServiceImpl implements CommentService {
         System.out.println("a: "+mapper.getCommentsByAid(aid));
         return mapper.getCommentsByAid(aid);
     }
+
+    /**
+     * 新增评论
+     *
+     * @param comment
+     * @return
+     */
+    @Override
+    public Integer addComment(Comment comment) {
+        return mapper.addComment(comment);
+    }
+
+    /**
+     * 更新评论
+     *
+     * @param comment
+     * @return
+     */
+    @Override
+    public Integer updateComment(Comment comment) {
+        return mapper.updateComment(comment);
+    }
+
+    /**
+     * 删除评论
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Integer deleteComment(Integer id) {
+        //检查是否有子评论  删除
+            mapper.deleteCommentByPid(id);
+        return mapper.deleteComment(id);
+    }
 }

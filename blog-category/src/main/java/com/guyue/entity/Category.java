@@ -50,8 +50,12 @@ public class Category {
         return createTime;
     }
 
-    public void setCreateTime(Date create_time) {
-        this.createTime = create_time;
+    public void setCreateTime(Date createTime) {
+        if (createTime==null){
+            this.createTime =new Date();
+        }else {
+            this.createTime = createTime;
+        }
     }
 
     @Override

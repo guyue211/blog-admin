@@ -1,4 +1,4 @@
-package utils;
+package com.guyue.utils;
 
 /**
  * @author tokyo

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author tokyo
@@ -15,7 +12,7 @@ import java.util.Map;
  */
 @Component
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Article{
+public class Article {
     //文章id
     private Integer id;
     //文章标题
@@ -39,7 +36,7 @@ public class Article{
     //文章uuid
     private String articleUUID;
     //评论
-    private HashMap<Object,Object> comments;
+    private List<Comment> comments;
     //标签
     private List<Label> labels;
 
@@ -64,7 +61,7 @@ public class Article{
     public Article() {
     }
 
-    public Article(Integer id, String title, String content, Date createTime, Date updateTime, Category category, String author, Integer likeNum, Integer pageViews, String articleUUID, HashMap<Object,Object> comments, List<Label> labels) {
+    public Article(Integer id, String title, String content, Date createTime, Date updateTime, Category category, String author, Integer likeNum, Integer pageViews, String articleUUID,List<Comment> comments, List<Label> labels) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -108,7 +105,11 @@ public class Article{
     }
 
     public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+        if (createTime==null){
+            this.createTime =new Date();
+        }else {
+            this.createTime = createTime;
+        }
     }
 
     public Date getUpdateTime() {
@@ -116,7 +117,11 @@ public class Article{
     }
 
     public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+        if (updateTime==null){
+            this.updateTime =new Date();
+        }else {
+            this.updateTime = updateTime;
+        }
     }
 
     public Category getCategory() {
@@ -156,15 +161,21 @@ public class Article{
     }
 
     public void setArticleUUID(String articleUUID) {
-        this.articleUUID = articleUUID;
+        if (articleUUID == null || articleUUID.equals("")) {
+            this.articleUUID = UUID.randomUUID().toString();
+        } else {
+            this.articleUUID = articleUUID;
+        }
     }
 
-    public HashMap<Object,Object> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(HashMap<Object,Object> comments) {
-        this.comments = comments;
+    public void setComments( List<Comment> comments) {
+        if (labels.size()>0){
+            this.comments = comments;
+        }
     }
 
     public List<Label> getLabels() {
@@ -172,6 +183,8 @@ public class Article{
     }
 
     public void setLabels(List<Label> labels) {
-        this.labels = labels;
+        if (labels.size()>0){
+            this.labels = labels;
+        }
     }
 }

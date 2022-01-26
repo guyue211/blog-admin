@@ -3,10 +3,32 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guyue.mapper.CategoryMapper">
-<!--    根据id查类别-->
+    <!--    新增类别-->
+    <insert id="addCategory">
+        insert into category(name) values(#{name})
+    </insert>
+    <!--    更新类别-->
+    <update id="updateCategory">
+        update category set
+        <trim suffixOverrides=",">
+        <if test="name !=null and name!=''">
+            name=#{name},
+        </if>
+        <if test="createTime !=null">
+            create_time =#{createTime},
+        </if>
+        </trim>
+        where id=#{id}
+    </update>
+    <!--    删除单个类别-->
+    <delete id="deleteCategory">
+        delete  from category where id=#{id}
+    </delete>
+    <!--    根据id查类别-->
     <select id="getCategoryById" resultType="com.guyue.entity.Category">
         select id, name from category where id=#{id}
     </select>
+    <!--    获取所有类别-->
     <select id="getCategorys" resultType="com.guyue.entity.Category">
         select id, name, create_time from category
     </select>
