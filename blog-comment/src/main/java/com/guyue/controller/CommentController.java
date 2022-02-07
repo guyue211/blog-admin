@@ -59,4 +59,16 @@ public class CommentController {
         if (result==0)return new Result(400, MessageConstant.DELETE_COMMENT_FALL);
         return new Result(204, MessageConstant.DELETE_COMMENT_SUSSES);
     }
+
+    /**
+     * 根据文章id删除对应评论
+     * @param aids
+     * @return
+     */
+    @DeleteMapping("/admin/deleteCommentByAid/{ids}")
+    public Result deleteCommentByAid(@PathVariable("ids") int[] aids){
+        Integer result=service.deleteCommentByAids(aids);
+        if (result==0)return new Result(400, MessageConstant.DELETE_COMMENT_FALL);
+        return new Result(204, MessageConstant.DELETE_COMMENT_SUSSES,result);
+    }
 }

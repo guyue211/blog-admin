@@ -37,4 +37,11 @@ public interface CommentService {
      * @return
      */
     Integer deleteComment(Integer id);
+
+    /**
+     * 根据文章id删对应评论
+     * @param aids
+     * @return
+     */
+    Integer deleteCommentByAids(int[] aids);
 }

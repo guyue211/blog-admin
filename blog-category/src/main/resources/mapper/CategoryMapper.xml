@@ -32,4 +32,7 @@
     <select id="getCategorys" resultType="com.guyue.entity.Category">
         select id, name, create_time from category
     </select>
+    <select id="getCategoryByName" resultType="com.guyue.entity.Category">
+        select id, name, create_time from category where name=#{name}
+    </select>
 </mapper>

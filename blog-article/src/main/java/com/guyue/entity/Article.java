@@ -162,7 +162,7 @@ public class Article {
 
     public void setArticleUUID(String articleUUID) {
         if (articleUUID == null || articleUUID.equals("")) {
-            this.articleUUID = UUID.randomUUID().toString();
+            this.articleUUID = UUID.randomUUID().toString().replaceAll("-","");
         } else {
             this.articleUUID = articleUUID;
         }

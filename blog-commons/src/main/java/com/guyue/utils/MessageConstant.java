@@ -29,7 +29,11 @@ public class MessageConstant {
     public static final String SELECT_CATEGORY_FALL = "查询分类失败";
     public static final String UPDATE_CATEGORY_SUSSES = "更新分类成功";
     public static final String UPDATE_CATEGORY_FALL = "更新分类失败";
+    public static final String UPDATE_CATEGORY_REPEAT = "更新分类重名";
+
     public static final String ADD_CATEGORY_SUSSES = "新增分类成功";
+    public static final String ADD_CATEGORY_REPEAT = "新增分类重名";
+
     public static final String ADD_CATEGORY_FALL = "新增分类失败";
     public static final String DELETE_CATEGORY_SUSSES = "删除分类成功";
     public static final String DELETE_CATEGORY_FALL = "删除分类失败";
@@ -37,10 +41,21 @@ public class MessageConstant {
 
     public static final String SELECT_LABEL_SUSSES = "查询标签成功";
     public static final String SELECT_LABEL_FALL = "查询标签失败";
+    public static final String UPDATE_LABEL_SUSSES = "更新标签成功";
+    public static final String UPDATE_LABEL_FALL = "更新标签失败";
+    public static final String UPDATE_LABEL_REPEAT = "更新标签重名";
+    public static final String ADD_LABEL_SUSSES = "添加标签成功";
+    public static final String ADD_LABEL_FALL = "添加标签失败";
+    public static final String ADD_LABEL_REPEAT = "添加标签重名";
+    public static final String DELETE_LABEL_SUSSES = "删除标签成功";
+    public static final String DELETE_LABEL_FALL = "删除标签失败";
 
     public static final String SELECT_STATISTICS_SUSSES = "查询统计信息成功";
     public static final String SELECT_STATISTICS_FALL = "查询统计信息失败";
 
+
+    public static final String ADD_RELY_FALL = "添加文章对应标签关系失败";
+    public static final String DELETE_RELY_FALL = "删除文章对应标签关系失败";
 
 
 

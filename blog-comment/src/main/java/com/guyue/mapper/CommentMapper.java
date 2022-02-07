@@ -52,4 +52,6 @@ public interface CommentMapper {
      * @return
      */
     Integer deleteCommentByPid(Integer pid);
+
+    Integer deleteCommentByAids(int[] aids);
 }

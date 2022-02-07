@@ -2,6 +2,7 @@ package com.guyue.controller;
 
 import com.guyue.entity.Category;
 import com.guyue.service.CategoryService;
+import javafx.scene.chart.CategoryAxis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.guyue.utils.MessageConstant;
@@ -14,6 +15,7 @@ import java.util.List;
  * @date 2022/1/23
  */
 @RestController
+@RequestMapping("/admin")
 public class CategoryController {
     @Autowired
     private CategoryService service;
@@ -22,7 +24,7 @@ public class CategoryController {
      * 查询所有分类
      * @return
      */
-    @GetMapping("/admin/getCategorys")
+    @GetMapping("/getCategorys")
     public Result getCategorys(){
         List<Category> categories=service.getCategorys();
         if (categories==null)return new Result(500, MessageConstant.SELECT_CATEGORY_FALL);
@@ -34,9 +36,10 @@ public class CategoryController {
      * @param category
      * @return
      */
-    @PutMapping("/admin/updateCategory")
+    @PutMapping("/updateCategory")
     public Result updateCategory(@RequestBody Category category){
         Integer result =service.updateCategory(category);
+        if (result==-1) return new Result(401, MessageConstant.UPDATE_CATEGORY_REPEAT);
         if (result==0) return new Result(400, MessageConstant.UPDATE_CATEGORY_FALL);
         return new Result(200, MessageConstant.UPDATE_CATEGORY_SUSSES);
     }
@@ -47,9 +50,10 @@ public class CategoryController {
      * @param category
      * @return
      */
-    @PostMapping("/admin/addCategory")
+    @PostMapping("/addCategory")
     public Result addCategory(@RequestBody Category category){
         Integer result =service.addCategory(category);
+        if (result==-1) return new Result(401, MessageConstant.ADD_CATEGORY_REPEAT);
         if (result==0) return new Result(400, MessageConstant.ADD_CATEGORY_FALL);
         return new Result(200, MessageConstant.ADD_CATEGORY_SUSSES);
     }
@@ -59,11 +63,17 @@ public class CategoryController {
      * @param id
      * @return
      */
-    @DeleteMapping("/admin/deleteCategory/{id}")
+    @DeleteMapping("/deleteCategory/{id}")
     public Result deleteCategory(@PathVariable("id") Integer id){
+        //删文章依赖的分类
         Integer result =service.deleteCategory(id);
         if (result==0) return new Result(400, MessageConstant.DELETE_CATEGORY_FALL);
         return new Result(200, MessageConstant.DELETE_CATEGORY_SUSSES);
     }
 
+    @GetMapping("/getCategoryByName/{name}")
+    public Category getCategoryByName(@PathVariable("name") String name){
+        Category category=service.getCategoryByName(name);
+        return category;
+    }
 }

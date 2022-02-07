@@ -24,9 +24,31 @@ public interface CategoryMapper {
      */
     List<Category> getCategorys();
 
+    /**
+     * 更新类别
+     * @param category
+     * @return
+     */
     Integer updateCategory(Category category);
 
+    /**
+     * 删除类别
+     * @param id
+     * @return
+     */
     Integer deleteCategory(Integer id);
 
+    /**
+     * 新增类别
+     * @param category
+     * @return
+     */
     Integer addCategory(Category category);
+
+    /**
+     * 根据name查类别
+     * @param name
+     * @return
+     */
+    Category getCategoryByName(String name);
 }

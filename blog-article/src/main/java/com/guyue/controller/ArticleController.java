@@ -23,15 +23,16 @@ public class ArticleController {
     private ArticleService service;
     @Autowired
     private CommentsFeignService commentsFeignService;
+
     /**
-     * 后台查询全部文章 并分页
+     * 查询全部文章 并分页
      * @param pageInfo
      * @return
      */
     @GetMapping("/admin/getArticles")
     public Result getArticles(@RequestBody PageInfo pageInfo){
         List<Article> articles = service.getArticles(pageInfo);
-        if (articles==null) return new Result(500, MessageConstant.SELECT_ARTICLE_FALL);
+        if (articles==null) return new Result(400, MessageConstant.SELECT_ARTICLE_FALL);
         HashMap<Object, Object> date = new HashMap<>();
         date.put("articles",articles);
         date.put("pageInfo",pageInfo);
@@ -46,9 +47,8 @@ public class ArticleController {
     @PostMapping("/admin/addArticle")
     public Result addArticle(@RequestBody Article article){
         int result=service.addArticle(article);
-        if(result==0){
-            return new Result(400,MessageConstant.RELEASE_ARTICLE_FALL);
-        }
+        if(result==-1)return new Result(401,MessageConstant.ADD_RELY_FALL);
+        if(result==0) return new Result(400,MessageConstant.RELEASE_ARTICLE_FALL);
         return new Result(204,MessageConstant.RELEASE_ARTICLE_SUSSES);
     }
 
@@ -60,9 +60,7 @@ public class ArticleController {
     @PutMapping("/admin/updateArticle")
     public Result updateArticle(@RequestBody Article article){
         int result=service.updateArticle(article);
-        if(result==0){
-            return new Result(500,MessageConstant.UPDATE_ARTICLE_FALL);
-        }
+        if(result==0) return new Result(400,MessageConstant.UPDATE_ARTICLE_FALL);
         return new Result(204,MessageConstant.UPDATE_ARTICLE_SUSSES);
     }
 
@@ -73,9 +71,12 @@ public class ArticleController {
      */
     @DeleteMapping("/admin/deleteArticles")
     public Result deleteArticle(@RequestBody int[] ids){
+        //删除文章对应的评论
+        Result result1 = commentsFeignService.deleteCommentByAid(ids);
         int result=service.deleteArticle(ids);
-        if(result==0)  return new Result(500,MessageConstant.DELETE_ARTICLE_FALL);
-        return new Result(200,MessageConstant.DELETE_ARTICLE_SUSSES);
+        if(result==-1)  return new Result(401,MessageConstant.DELETE_RELY_FALL);
+        if(result==0)  return new Result(400,MessageConstant.DELETE_ARTICLE_FALL);
+        return new Result(200,MessageConstant.DELETE_ARTICLE_SUSSES,result1.getData());
 
     }
 
@@ -86,8 +87,8 @@ public class ArticleController {
      */
     @GetMapping("/ordinary/getArticle/{id}")
     public Result getArticle(@PathVariable Integer id){
-        Article article=service.getArticle(id);
-        if (article==null) return new Result(500,MessageConstant.SELECT_ARTICLE_FALL);
+        Article article= (Article) service.getArticle(id);
+        if (article==null) return new Result(400,MessageConstant.SELECT_ARTICLE_FALL);
         HashMap<Object, Object> map = new HashMap<>();
         //查文章下评论
         List<Comment> comments = commentsFeignService.getComments(id);
@@ -98,6 +99,16 @@ public class ArticleController {
         return new Result(200,MessageConstant.SELECT_ARTICLE_SUSSES,map);
     }
 
-
+    /**
+     * 删除类别 将依赖文章cid设置为0
+     * @param cid
+     * @return
+     */
+    @PutMapping("/admin/updateArticleByCid")
+    public Result updateArticleByCid(@RequestParam("id") Integer cid){
+        Integer result=service.updateArticleByCid(cid);
+        if(result==0) return new Result(400,MessageConstant.UPDATE_ARTICLE_FALL);
+        return new Result(204,MessageConstant.UPDATE_ARTICLE_SUSSES);
+    }
 
 }

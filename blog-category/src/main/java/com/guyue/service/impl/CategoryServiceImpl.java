@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author tokyo
@@ -36,6 +37,9 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public Integer updateCategory(Category category) {
+        //查询分类是否重名
+        Category category1=mapper.getCategoryByName(category.getName());
+        if (category1!=null && !Objects.equals(category1.getId(), category.getId()))return -1;
         return mapper.updateCategory(category);
     }
 
@@ -47,6 +51,9 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public Integer addCategory(Category category) {
+        //查询分类是否重名
+        Category category1=mapper.getCategoryByName(category.getName());
+        if (category1!=null)return -1;
         return mapper.addCategory(category);
     }
 
@@ -59,5 +66,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Integer deleteCategory(Integer id) {
         return mapper.deleteCategory(id);
+    }
+
+    @Override
+    public Category getCategoryByName(String name) {
+        return mapper.getCategoryByName(name);
     }
 }

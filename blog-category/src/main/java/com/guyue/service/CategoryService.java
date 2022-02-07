@@ -35,4 +35,7 @@ public interface CategoryService {
      * @return
      */
     Integer deleteCategory(Integer id);
+
+
+    Category getCategoryByName(String name);
 }

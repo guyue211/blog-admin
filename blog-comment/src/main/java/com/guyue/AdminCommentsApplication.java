@@ -12,6 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableFeignClients
 @MapperScan(basePackages = "com.guyue.mapper")
 public class AdminCommentsApplication {
     public static void main(String[] args) {

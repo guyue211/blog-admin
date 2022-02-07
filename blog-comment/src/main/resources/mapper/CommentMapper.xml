@@ -13,9 +13,11 @@
         <result column="create_time" property="createTime"/>
         <collection property="comments" column="id" select="getParentComment" javaType="ArrayList" ofType="com.guyue.entity.Comment"/>
     </resultMap>
+<!--    发表批量-->
     <insert id="addComment">
         insert into comment(name, content, photo, email,parent_id, article_id) values(#{name},#{content},#{photo},#{email},#{parentId},#{articleId})
     </insert>
+<!--    修改评论-->
     <update id="updateComment">
         update comment set
         <trim suffixOverrides=",">
@@ -43,15 +45,26 @@
         </trim>
         where id=#{id}
     </update>
+<!--    删除评论-->
     <delete id="deleteComment">
         delete from comment where id=#{id}
     </delete>
+<!--    删除顶级评论下子评论-->
     <delete id="deleteCommentByPid">
         delete from comment where parent_id=#{pid}
     </delete>
+<!--    根据文章id 删对应评论-->
+    <delete id="deleteCommentByAids">
+        delete from comment where article_id in
+        <foreach collection="array" item="aid"  index="index" open="(" close=")" separator=",">
+            #{aid}
+        </foreach>
+    </delete>
+    <!--    根据文章id查顶级评论-->
     <select id="getCommentsByAid" resultMap="comments" >
         select id, name, content, photo, email, create_time,parent_id,id from comment where article_id=#{aid} and parent_id=0
     </select>
+<!--    根据父id查子评论-->
     <select id="getParentComment" resultType="com.guyue.entity.Comment">
         select id, name, content, photo, email,parent_id from comment where parent_id=#{parentId}
     </select>
