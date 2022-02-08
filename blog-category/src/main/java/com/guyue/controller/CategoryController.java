@@ -24,9 +24,9 @@ public class CategoryController {
      * 查询所有分类
      * @return
      */
-    @GetMapping("/getCategorys")
-    public Result getCategorys(){
-        List<Category> categories=service.getCategorys();
+    @GetMapping("/getCategories")
+    public Result getCategories(){
+        List<Category> categories=service.getCategories();
         if (categories==null)return new Result(500, MessageConstant.SELECT_CATEGORY_FALL);
         return new Result(200, MessageConstant.SELECT_CATEGORY_SUSSES,categories);
     }

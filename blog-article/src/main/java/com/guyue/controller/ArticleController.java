@@ -87,6 +87,7 @@ public class ArticleController {
      */
     @GetMapping("/ordinary/getArticle/{id}")
     public Result getArticle(@PathVariable Integer id){
+
         Article article= (Article) service.getArticle(id);
         if (article==null) return new Result(400,MessageConstant.SELECT_ARTICLE_FALL);
         HashMap<Object, Object> map = new HashMap<>();

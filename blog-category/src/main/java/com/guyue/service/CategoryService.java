@@ -13,7 +13,7 @@ public interface CategoryService {
      * 查询所有类别
      * @return
      */
-    List<Category> getCategorys();
+    List<Category> getCategories();
 
     /**
      * 更新类别

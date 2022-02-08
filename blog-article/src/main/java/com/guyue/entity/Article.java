@@ -12,7 +12,7 @@ import java.util.*;
  */
 @Component
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Article {
+public class Article implements Comparable<Article> {
     //文章id
     private Integer id;
     //文章标题
@@ -39,6 +39,8 @@ public class Article {
     private List<Comment> comments;
     //标签
     private List<Label> labels;
+
+
 
     @Override
     public String toString() {
@@ -186,5 +188,11 @@ public class Article {
         if (labels.size()>0){
             this.labels = labels;
         }
+    }
+
+
+    @Override
+    public int compareTo(Article o) {
+        return o.getId()-this.getId();
     }
 }

@@ -22,7 +22,7 @@ public interface CategoryMapper {
      * 获取所有类别
      * @return
      */
-    List<Category> getCategorys();
+    List<Category> getCategories();
 
     /**
      * 更新类别

@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface CommentMapper {
     /**
-     * 根据文章id查顶级评论
+     * 根据文章id查评论
      * @param aid
      * @return
      */
@@ -46,12 +46,13 @@ public interface CommentMapper {
      * @return
      */
     Integer deleteComment(Integer id);
-    /**
-     * 删除父评论下子评论
-     * @param pid
-     * @return
-     */
-    Integer deleteCommentByPid(Integer pid);
 
     Integer deleteCommentByAids(int[] aids);
+
+    /**
+     * 查id对应文章aid
+     * @param id
+     * @return
+     */
+    String getComment(Integer id);
 }

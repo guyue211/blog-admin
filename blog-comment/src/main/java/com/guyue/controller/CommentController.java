@@ -53,6 +53,11 @@ public class CommentController {
         return new Result(204, MessageConstant.UPDATE_COMMENT_SUSSES);
     }
 
+    /**
+     * 删除评论
+     * @param id
+     * @return
+     */
     @DeleteMapping("/admin/deleteComment/{id}")
     public Result deleteComment(@PathVariable("id") Integer id){
         Integer result=service.deleteComment(id);

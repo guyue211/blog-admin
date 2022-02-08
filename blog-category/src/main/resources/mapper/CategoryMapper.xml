@@ -5,6 +5,9 @@
 <mapper namespace="com.guyue.mapper.CategoryMapper">
     <!--    新增类别-->
     <insert id="addCategory">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into category(name) values(#{name})
     </insert>
     <!--    更新类别-->
@@ -29,7 +32,7 @@
         select id, name from category where id=#{id}
     </select>
     <!--    获取所有类别-->
-    <select id="getCategorys" resultType="com.guyue.entity.Category">
+    <select id="getCategories" resultType="com.guyue.entity.Category">
         select id, name, create_time from category
     </select>
     <select id="getCategoryByName" resultType="com.guyue.entity.Category">

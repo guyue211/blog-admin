@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.guyue.utils.PageInfo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author tokyo
@@ -31,24 +31,45 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public List<Article> getArticles(PageInfo pageInfo) {
-
-        //所有文章
-        List<Article> articles = mapper.getArticles();
-        //分页后文章数据
-        List<Article> articleList = new ArrayList<>();
-        //获取总页数 和总条数
-        if (articles.size()%pageInfo.getCurrentCount()!=0){
-            pageInfo.setTotalPage(articles.size()/ pageInfo.getCurrentCount()+1);
-        }else {
-            pageInfo.setTotalPage(articles.size()/ pageInfo.getCurrentCount());
-        }
-        pageInfo.setTotalRecord(articles.size());
-        if(pageInfo.getCurrentPage()*pageInfo.getCurrentCount()>articles.size()) return null;
-
+        List<Article> articles=new ArrayList<>();
         // 获取起点
         int pageStart = (pageInfo.getCurrentPage()-1) * pageInfo.getCurrentCount();
         // 获取终点
         int pageStop = pageStart + pageInfo.getCurrentCount();
+        //所有文章
+        Map<Object, Object> articles1 = redisUtil.hEntries("articles");
+        System.out.println(articles1.size());
+        //判断缓存的数据数量是否正确  不正确就得更新缓存
+        if (articles1.size()>0 && articles1.size()>=pageStart){
+            for (Map.Entry<Object, Object> objectObjectEntry : articles1.entrySet()) {
+                articles.add((Article) objectObjectEntry.getValue());
+            }
+
+        }else {
+            articles= mapper.getArticles();
+            //没有缓存就添加articles
+            HashMap<String, Object> map = new HashMap<>();
+            for (Article article : articles) {
+                map.put(String.valueOf(article.getId()),article);
+            }
+            redisUtil.hPutAll("articles", map);
+        }
+        //进行排序  id大的最新发布 排前面
+        Collections.sort(articles);
+        //分页后文章数据
+        List<Article> articleList = new ArrayList<>();
+        //每页条数
+        Integer currentCount = pageInfo.getCurrentCount();
+        //获取总页数
+        if (articles.size()%currentCount!=0){
+            pageInfo.setTotalPage(articles.size()/ currentCount+1);
+        }else {
+            pageInfo.setTotalPage(articles.size()/ currentCount);
+        }
+        //获取总条数
+        pageInfo.setTotalRecord(articles.size());
+        //判断分页总数大于实际总条数 则返回错误
+        if(pageInfo.getCurrentPage()*pageInfo.getCurrentCount()>articles.size()) return null;
         // 开始遍历
         while (pageStart < pageStop) {
             // 最后一页可能不够
@@ -120,7 +141,7 @@ public class ArticleServiceImpl implements ArticleService {
         Article article = (Article) redisUtil.hGet("articles", String.valueOf(id));
         if (article!=null) return  article;
         Article article1 = mapper.getArticle(id);
-        //更新
+        //无则更新
         redisUtil.hPut("articles", String.valueOf(article1.getId()),article1);
         return article1;
     }
